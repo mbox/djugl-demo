@@ -37,7 +37,7 @@ Edit urls.py
    from demo.views import demo_view
 
 urlpatterns = [
-    url(r'/', demo_view),
+    url(r'$', demo_view),
     url(r'^admin/', admin.site.urls),
 ]
 
