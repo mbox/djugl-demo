@@ -1,0 +1,100 @@
+
+
+pip install Django zappa
+
+===================================
+
+
+django-admin startproject djugl_demo
+cd djugl_demo
+./manage.py migrate
+./manage.py runserver
+
+
+====================================
+
+zappa init
+
+zappa deploy demo
+
+============
+
+Edit ALLOWED_HOSTS in settings.py
+ >>>
+    ALLOWED_HOSTS = [<endpoint>, '127.0.0.1', 'localhost']
+ <<<
+
+zappa update demo
+
+==============
+
+Add an app
+
+./manage.py startapp demo
+
+Edit urls.py
+ >>>
+   from demo.views import demo_view
+
+urlpatterns = [
+    url(r'/', demo_view),
+    url(r'^admin/', admin.site.urls),
+]
+
+ <<<
+
+Edit demo/views.py
+
+ >>>
+ def demo_view(request):
+    return render(request, 'demo.html')
+ <<<
+
+Create demo/templates/demo.html
+
+ >>>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>It worked!</title>
+</head>
+<body>
+<h1>Django and AWS Lambda demo for Djugl</h1>
+<img src="https://cdn-images-1.medium.com/max/500/1*_NQM5vxSLtXJyZxuwWKHNA.jpeg">
+
+</body>
+</html>
+
+ <<<
+
+Edit settings.py
+
+add 'demo' to installed apps
+
+
+=============================
+
+Update to lambda
+
+zappa update demo
+
+
+===============================
+
+
+TEST
+
+
+===============================
+
+Cleanup
+
+zappa undeploy demo
+
+
+
+
+
+
